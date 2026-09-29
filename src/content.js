@@ -274,3 +274,10 @@ export const meta = {
   copyright: `© ${new Date().getFullYear()} Haokai (Daniel) Yang.`,
   builtWith: "React + Vite",
 };
+
+export const hardware_project = [
+  title = senminer_detector,
+  summary =
+  
+
+]
