@@ -926,3 +926,10 @@ export const meta = {
   copyright: `© ${new Date().getFullYear()} Haokai Yang`,
   builtWith: "Built with React + Vite",
 };
+
+export const hardware_project = [
+  title = senminer_detector,
+  summary =
+  
+
+]
