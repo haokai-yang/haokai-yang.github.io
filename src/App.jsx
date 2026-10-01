@@ -10,7 +10,7 @@ function Header() {
   const navigate = useNavigate()
   const isHome = pathname === '/'
 
-  // Navigate to a section: go home (if not there), then scroll.
+  // Nav that works on any page: on home, scroll; elsewhere, route home then scroll.
   const goToSection = (sectionId) => (e) => {
     e.preventDefault()
     if (isHome) {
@@ -36,13 +36,12 @@ function Header() {
   )
 }
 
-// When the home page mounts with a scrollTo in router state, scroll to it.
+// When the home page mounts with a scrollTo in router state, scroll to that section.
 function ScrollHandler() {
   const location = useLocation()
   useEffect(() => {
     const target = location.state?.scrollTo
     if (target) {
-      // small delay so the section is rendered before we scroll
       setTimeout(() => {
         document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
       }, 50)

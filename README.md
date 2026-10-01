@@ -5,31 +5,47 @@ Built with Vite + React + React Router.
 
 ## How to edit the content
 
-**Almost everything you'll want to change is in one file: `src/content.js`.**
+**Almost everything is in one file: `src/content.js`.**
 
-That file contains:
-- `profile` — name, tagline, intro paragraph, contact info
-- `skills` — the skill tags grouped by category
+It contains:
+- `profile` — name, tagline, intro, contact info
+- `skills` — skill tags grouped by category
 - `journey` — the learning-timeline entries
-- `projects` — the project pages
+- `projects` — each project's page content
 
-Open `src/content.js`, change text, save, and the site updates.
+Edit that file, save, and the site updates.
+
+### Section types inside a project
+
+Each project has a `sections` array. Every section has a `heading` plus
+one or more of these fields:
+
+- `body` — long-form paragraph text (newlines preserved)
+- `list` — array of `{ label, text }` for labeled bullet points
+- `body2` — more text after the list
+- `timeline` — array of `{ phase, weeks, title, note }` for phase tables
+- `metrics` — array of `{ value, label, sub }` for a big-number stat grid
+- `callout` — a string rendered as an emphasized pull-quote
+
+### To link a paper (PDF)
+
+Put the PDF into the `public/` folder, then in `content.js` add
+`paperUrl: "your-filename.pdf"` to the project. Optionally add
+`paperNote: "..."` for a subtitle next to the download button.
+
+The download button appears at the top of the project page and again at
+the bottom.
 
 ### To add a new project
 
-In `src/content.js`, copy one of the existing entries inside the
-`projects` array and change:
-- `slug` (must be unique, used in the URL)
-- `title`, `blurb`, `tags`, `status`, `duration`, `deliverable`
-- `sections` (each section can have a `body`, a `list`, or a `timeline`)
-
-No other files need to be edited — the home page and routing
-pick up new projects automatically.
+Copy an existing entry in the `projects` array, change the `slug` (must
+be unique — used in the URL), and update the content. No other files
+need editing; the home page and routing pick it up automatically.
 
 ### To change colors or fonts
 
-Open `src/styles.css` and change the CSS variables at the top
-(`--bg`, `--accent`, `--serif`, etc.).
+Edit CSS variables at the top of `src/styles.css` (`--bg`, `--accent`,
+`--serif`, etc.).
 
 ## Running locally
 
@@ -38,7 +54,7 @@ npm install
 npm run dev
 ```
 
-Then open the URL printed in the terminal (usually `http://localhost:5173`).
+Then open `http://127.0.0.1:5173/` (or whatever URL is printed).
 
 ## Building for production
 
@@ -46,42 +62,30 @@ Then open the URL printed in the terminal (usually `http://localhost:5173`).
 npm run build
 ```
 
-This produces a `dist/` folder containing the static site.
+Outputs a `dist/` folder.
 
-## Free hosting options
+## Hosting
 
-### Easiest: Netlify Drop (no account needed for preview)
+- **Netlify Drop** (easiest, no account): drag `dist/` onto https://app.netlify.com/drop
+- **GitHub Pages**: push to a repo, enable Pages → GitHub Actions, use the
+  deploy workflow at `.github/workflows/deploy.yml`
+- **Vercel**, **Cloudflare Pages**, **Surge.sh**: all work fine
 
-1. Run `npm run build`
-2. Go to <https://app.netlify.com/drop>
-3. Drag the `dist/` folder onto the page
-4. You get a live URL immediately
-
-### GitHub Pages (when you push to GitHub)
-
-1. Push the repo to GitHub
-2. In repo Settings → Pages, set source to "GitHub Actions"
-3. Add a workflow file (see GitHub docs) or use any one-click action
-
-The site uses **HashRouter** and a relative `base` path in `vite.config.js`,
-so it works on any static host without server config.
-
-### Other free options
-
-- **Vercel** — connect GitHub, one-click deploy
-- **Cloudflare Pages** — free, fast, generous limits
-- **Surge.sh** — `npm install -g surge` then `surge dist/`
+The site uses HashRouter and relative `base` in `vite.config.js`, so it
+works on any static host without server-side rewrites.
 
 ## File layout
 
 ```
+public/
+  paper-snake-equivariance.pdf    ← paper PDF (served as-is)
 src/
-  content.js          ← edit this for almost everything
-  styles.css          ← edit this for visual design
-  main.jsx            ← React entry (rarely touched)
-  App.jsx             ← routing (rarely touched)
+  content.js                      ← edit for content
+  styles.css                      ← edit for design
+  main.jsx                        ← React entry
+  App.jsx                         ← routing + nav
   pages/
-    Home.jsx          ← home page layout
-    ProjectPage.jsx   ← shared layout for every project
+    Home.jsx
+    ProjectPage.jsx
     NotFound.jsx
 ```

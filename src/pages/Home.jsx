@@ -4,10 +4,8 @@ import { profile, skills, journey, projects } from '../content.js'
 export default function Home() {
   return (
     <>
-      {/* HERO */}
       <section className="hero">
         <div className="container">
-          <div className="hero-eyebrow fade-in">Portfolio · 2026</div>
           <h1 className="fade-in fade-in-delay-1">
             {profile.name}, <em>student researcher</em>
           </h1>
@@ -16,18 +14,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROJECTS */}
       <section className="section" id="projects">
         <div className="container">
           <div className="section-label">Projects</div>
-          <h2 className="section-title">Two questions I'm working on.</h2>
+          <h2 className="section-title">Some questions I'm working on.</h2>
           <div className="project-cards">
             {projects.map((p) => (
-              <Link
-                key={p.slug}
-                to={`/projects/${p.slug}`}
-                className="project-card"
-              >
+              <Link key={p.slug} to={`/projects/${p.slug}`} className="project-card">
                 <div className="project-card-eyebrow">{p.status}</div>
                 <h3>{p.title}</h3>
                 <p>{p.blurb}</p>
@@ -43,7 +36,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SKILLS */}
       <section className="section" id="skills">
         <div className="container">
           <div className="section-label">Topics studied</div>
@@ -63,7 +55,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JOURNEY */}
       <section className="section" id="journey">
         <div className="container">
           <div className="section-label">Learning journey</div>
