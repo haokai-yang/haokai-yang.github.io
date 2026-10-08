@@ -4,7 +4,7 @@
 
 export const profile = {
   name: "Haokai Yang",
-  intro: `I'm a high school student. Over the past year I've been getting into reinforcement learning (how you get machines to learn from trial and error) and the math and CS that surround it. That's meant a lot of reading in formal systems, MDPs, group theory, and complexity; a lot of coding in DQN, PPO, and group-equivariant networks; and eventually three research projects.
+  intro: `I'm a Senior in high school. Over the past year I've been getting into reinforcement learning (how you get machines to learn from trial and error) and the math and CS that surround it. That's meant a lot of reading in formal systems, MDPs, group theory, and complexity; a lot of coding in DQN, PPO, and group-equivariant networks; and eventually three research projects.
 
 One is about symmetry. When an environment has a natural rotational symmetry, like Snake does, does a neural network learning to play it actually pick up on the symmetry? Or does it waste effort learning the same thing in eight different orientations? The other is about robot-assisted feeding: how can a simulated feeding robot tell when a person actually wants their next bite, when all it has to go on are noisy, unreliable signals?
 My third project, a hardware system I built with embedded AI on it.`,
@@ -145,8 +145,10 @@ export const projects = [
         heading: "Where this started",
         body: `When I started working on Snake, I kept getting stuck on a thought: if you rotate the board
 90 degrees, the game is exactly the same. You still eat food and avoid your tail the same way,
-regardless of orientation. This felt obvious once I noticed it. What wasn't obvious was
-whether a neural network learning to play Snake would ever notice too.
+regardless of orientation. I once noticed this in philosophy, if I can assume most of the perspectives arounds
+an argument, I suppose to get a more accuate result (after this paper I will probably optimal how to 
+design the reflection of perspectives with chaotic couplings with respect to the logical symmetry). What wasn't obvious was
+whether a neural network learning to play Snake would ever notice the pattern.
 
 That's what this project turned into. When an environment has a symmetry, some way to
 transform the world that leaves the rules unchanged, does an RL agent pick up on it? And if
@@ -176,21 +178,21 @@ dynamics don't care about orientation.
 Given that setup, I proved three things:`,
         list: [
           {
-            label: "Lemma 1",
+            label: "1 Lemma",
             text: "The optimal value function V* is invariant under G. The best value you can get from a state doesn't change if you rotate the state.",
           },
           {
-            label: "Theorem 2",
+            label: "2 Theorem",
             text: "The set of optimal policies is closed under G. If π* is optimal, so is g·π* for every group element g.",
           },
           {
-            label: "Corollary 3",
-            text: "An equivariant optimal policy always exists. If you average any optimal policy over the group, you get one that's equivariant by construction.",
+            label: "3 Corollary",
+            text: "An equivariant optimal policy always exists. If you average any optimal policy over the group, you get a equivariant one by construction.",
           },
         ],
         body2: `The last one is the important result. You can restrict your search to equivariant policies
 without giving anything up, because there's always at least one optimal policy in that
-restricted class. The proofs come down to the Bellman optimality operator being a contraction
+restricted class. The proofs come down to the Bellman optimality operator being a contruction
 and the group being finite, so they work for any finite group. Snake and D₄ are just one
 instance.`,
       },
@@ -285,7 +287,6 @@ symmetric copies of each other.`,
 to force it.
 
 I built a D₄-equivariant CNN using the escnn library. The construction is called
-group-equivariant convolution, from Cohen & Welling 2016, which is the discrete case of a
 more general framework called steerable CNNs. Instead of a normal feature map with C channels
 at each grid position, you carry C feature maps per group element (so C × 8 in our case,
 since D₄ has 8 elements). A group-convolution layer transforms each filter both spatially and
@@ -370,7 +371,8 @@ I'd like to work on that next.`,
             text: `Feeding robots are starting to show up in real care settings, and the tricky part is that the
 robot has no direct way of knowing when someone wants their next bite. That intention is
 fuzzy. It only shows up through weak signals like whether the mouth is open, and those signals
-are noisy (e.g., people may talk or chew with mouth open), so the robot can easily misread them. Getting it wrong isn't harmless either, because putting food in someone's mouth while they're still chewing is a genuine safety problem.`,
+are noisy (e.g., people may talk or chew with mouth open), so the robot can easily misread them. Getting it wrong isn't harmless either, 
+because putting food in someone's mouth while they're still chewing is a genuine safety problem.`,
           },
           { type: "body", text: `So I set out to answer three questions:` },
           {
@@ -928,8 +930,8 @@ export const meta = {
 };
 
 export const hardware_project = [
-  title = senminer_detector,
-  summary =
-  
-
+  {
+    title: "senminer_detector",
+    summary: "a hardware to help people make discoveries in the daily life"
+  }
 ]
